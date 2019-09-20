@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <title>Listado de Propietarios</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div th:if="${mensaje}">
+				<div th:text="${mensaje]" class="alert alert-success" role="alert"></div>
+			</div>
+		</div>
+		<div class="row">
+		 	<h1>Listado de propietarios</h1>
+		</div>
+		<div class="row">
+			<div class="pull-right">
+				<a href="/propietarios/nuevo" class="btn btn-primary">Nuevo</a>
+			</div>
+		</div>
+		
+		<div class="row">
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col">Apellido</th>
+		      <th scope="col">Nombre</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+    		<tr th:if="${propietarios.empty}">
+				<td colspan="2"> No hay propietarios para mostrar </td>
+		    </tr>
+		    <tr th:each="propietario : ${propietarios}">
+            	<td><span th:text="${propietario.apellido}"> </span></td>
+            	<td><span th:text="${propietario.nombre}"> </span></td>
+       		</tr>
+		  </tbody>
+		</table>
+		</div>
+	</div>
+</body>
+</html> 
