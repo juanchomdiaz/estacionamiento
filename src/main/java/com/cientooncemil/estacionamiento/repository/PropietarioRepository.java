@@ -21,4 +21,8 @@ public class PropietarioRepository {
 	public ArrayList<Propietario> getPropietarios() {
 		return propietarios;
 	}
+	
+	public Integer getPropietariosCount() {
+		return this.propietarios.size();
+	}
 }
