@@ -89,4 +89,10 @@ public class PropietarioController {
 		model.addAttribute("propietario", propietario);
 		return "propietarios/nuevoForm";
 	}
+	
+	@GetMapping("eliminar")
+	public RedirectView eliminarPropietario(@RequestParam String id) {
+		this.propietarioRepository.removePropietarioWithId(Integer.valueOf(id));
+		return new RedirectView("listar");	
+	}
 }

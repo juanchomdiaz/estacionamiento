@@ -10,13 +10,18 @@ public class PropietarioRepository {
 
 	private ArrayList<Propietario> propietarios;
 	
+	private Integer currentIndex;
+	
 	public PropietarioRepository() {
 		this.propietarios = new ArrayList<Propietario>();
+		this.currentIndex = 1;
 	}
 	
 	public void addPropietario(Propietario propietario) {
 		if(propietario.getId()==null) {
-			propietario.setId(this.getPropietariosCount() + 1);
+			//propietario.setId(this.getPropietariosCount() + 1);
+			propietario.setId(this.currentIndex);
+			this.currentIndex++;
 		}
 		this.propietarios.add(propietario);
 	}
