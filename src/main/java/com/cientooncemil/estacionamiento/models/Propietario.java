@@ -1,16 +1,18 @@
 package com.cientooncemil.estacionamiento.models;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
-@Component
 public class Propietario {
 	
-	@Value("Juan")
+	private Integer id;
 	private String nombre;
-	
-	@Value("Diaz")
 	private String apellido;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getNombre() {
 		return nombre;

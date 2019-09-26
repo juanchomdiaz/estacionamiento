@@ -23,8 +23,10 @@
 					<table class="table" id="propietariosTable">
 					  <thead>
 					    <tr>
+					      <th scope="col">Id</th>
 					      <th scope="col">Apellido</th>
 					      <th scope="col">Nombre</th>
+					      <th scope="col">Acciones</th>
 					    </tr>
 					  </thead>
 					  <tbody>
@@ -32,8 +34,10 @@
 							<td colspan="2"> No hay propietarios para mostrar </td>
 					    </tr>
 					    <tr th:each="propietario : ${propietarios}">
-			            	<td><span th:text="${propietario.apellido}"> </span></td>
+					       	<td><span th:text="${propietario.id}"> </span></td>
+					       	<td><span th:text="${propietario.apellido}"> </span></td>
 			            	<td><span th:text="${propietario.nombre}"> </span></td>
+			            	<td><a class="btn btn-small" th:href="@{'/propietarios/editar'(id=${propietario.id})}">Editar</a></td>
 			       		</tr>
 					  </tbody>
 					</table>
@@ -87,7 +91,7 @@
 	               		$('#propietariosTable > tbody').empty();
 	               	}
 	            
-	            	$('#propietariosTable > tbody:last-child').append('<tr><td><span>' + res.propietario.apellido + '</span></td>'+ '<td><span>' + res.propietario.nombre + '</span></td></tr>');
+	            	$('#propietariosTable > tbody:last-child').append('<tr><td><span>' + res.propietario.id + '</span></td>' + '<td><span>'+ res.propietario.apellido + '</span></td>'+ '<td><span>' + res.propietario.nombre + '</span></td>' + '<span><td><a class="btn btn-small" href="editar?id=' + res.propietario.id + '">Editar</a></span></td>' + '</tr>');
 	            }else{
 	              //Set error messages
 	              $.each(res.errorMessages,function(key,value){

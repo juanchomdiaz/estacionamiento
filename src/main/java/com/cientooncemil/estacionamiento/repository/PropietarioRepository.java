@@ -15,6 +15,9 @@ public class PropietarioRepository {
 	}
 	
 	public void addPropietario(Propietario propietario) {
+		if(propietario.getId()==null) {
+			propietario.setId(this.getPropietariosCount() + 1);
+		}
 		this.propietarios.add(propietario);
 	}
 
@@ -24,5 +27,30 @@ public class PropietarioRepository {
 	
 	public Integer getPropietariosCount() {
 		return this.propietarios.size();
+	}
+
+	public Propietario findPropietarioWithId(String id) {
+		Propietario result = null;
+		
+		for (Propietario p : this.propietarios) {
+			if(p.getId().toString().equals(id)) {
+				result = p;
+			}
+		}
+		
+		return result;
+	}
+
+
+	public void removePropietarioWithId(Integer id) {
+		int index = 0;
+		
+		for (int i=0; i<this.propietarios.size(); i++) {
+			if(this.propietarios.get(i).getId().equals(id)) {
+				index = i;
+			}
+		}
+		
+		this.propietarios.remove(index);		
 	}
 }

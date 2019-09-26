@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -44,6 +45,10 @@ public class PropietarioController {
 
 	@PostMapping("guardar")
 	public RedirectView guardarPropietario(@ModelAttribute Propietario propietario, Model model) {
+		if(propietario.getId()!=null) {
+			this.propietarioRepository.removePropietarioWithId(propietario.getId());
+		}
+		
 		this.propietarioRepository.addPropietario(propietario);
 		
 		model.addAttribute("mensaje", "El propietario se guardó exitosamente...");
@@ -55,7 +60,7 @@ public class PropietarioController {
 	public PropietarioJsonResponse guardarPropietario(@ModelAttribute @Valid Propietario propietario,
 	         BindingResult result) {
 
-		PropietarioJsonResponse response = new PropietarioJsonResponse();
+		  PropietarioJsonResponse response = new PropietarioJsonResponse();
 	      
 	      if(result.hasErrors()){
 	         
@@ -76,5 +81,12 @@ public class PropietarioController {
 	         response.setPropietario(propietario);
 	      }
 	      return response;
+	}
+	
+	@GetMapping("editar")
+	public String editarPropietario(@RequestParam String id, Model model) {
+		Propietario propietario = this.propietarioRepository.findPropietarioWithId(id);
+		model.addAttribute("propietario", propietario);
+		return "propietarios/nuevoForm";
 	}
 }

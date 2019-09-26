@@ -21,6 +21,7 @@
 			    <label for="nombre">Nombre</label>
 			    <input th:field="*{nombre}" type="text" class="form-control" id="nombre" placeholder="Ingrese uno o más nombres...">
 			  </div>
+			  <input th:field="*{id}" type="hidden" /> 
 			  <button type="submit" class="btn btn-primary">Guardar</button>
 			  <a href="/propietarios/listar" class="btn btn-danger">Cancelar</a>
 			</form>
