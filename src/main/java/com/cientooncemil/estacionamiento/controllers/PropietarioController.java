@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.cientooncemil.estacionamiento.models.Propietario;
+import com.cientooncemil.estacionamiento.models.Vehiculo;
+import com.cientooncemil.estacionamiento.models.form.PropietarioForm;
 import com.cientooncemil.estacionamiento.models.json.PropietarioJsonResponse;
 import com.cientooncemil.estacionamiento.repository.PropietarioRepository;
 
@@ -39,19 +41,21 @@ public class PropietarioController {
 	
 	@GetMapping("nuevo")
 	public String nuevoPropietario(Model model) {
-		model.addAttribute("propietario", new Propietario());
+		model.addAttribute("propietarioForm", new PropietarioForm());
 		return "propietarios/nuevoForm";
 	}
 
 	@PostMapping("guardar")
-	public RedirectView guardarPropietario(@ModelAttribute Propietario propietario, Model model) {
-		if(propietario.getId()!=null) {
-			this.propietarioRepository.removePropietarioWithId(propietario.getId());
+	public RedirectView guardarPropietario(@ModelAttribute PropietarioForm propietarioForm, Model model) {
+		if(propietarioForm.getPropietario().getId()!=null) {
+			this.propietarioRepository.removePropietarioWithId(propietarioForm.getPropietario().getId());
 		}
 		
-		this.propietarioRepository.addPropietario(propietario);
+		Vehiculo v = Vehiculo.getInstanceOf(propietarioForm.getTipoVehiculo());
+	    propietarioForm.getPropietario().agregarVehiculo(v);
+	    
+		this.propietarioRepository.addPropietario(propietarioForm.getPropietario());
 		
-		model.addAttribute("mensaje", "El propietario se guardó exitosamente...");
 		return new RedirectView("listar");	
 	}
 	

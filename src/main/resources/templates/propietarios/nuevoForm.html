@@ -12,16 +12,24 @@
 		</div>
 		
 		<div class="row">
-			<form th:action="@{/propietarios/guardar}" th:object="${propietario}" method="post">
+			<form th:action="@{/propietarios/guardar}" th:object="${propietarioForm}" method="post">
 			  <div class="form-group">
 			    <label for="apellido">Apellido</label>
-			    <input th:field="*{apellido}" type="text" class="form-control" id="apellido" placeholder="Ingrese un apellido...">
+			    <input th:field="*{propietario.apellido}" type="text" class="form-control" id="apellido" placeholder="Ingrese un apellido...">
 			  </div>
 			  <div class="form-group">
 			    <label for="nombre">Nombre</label>
-			    <input th:field="*{nombre}" type="text" class="form-control" id="nombre" placeholder="Ingrese uno o más nombres...">
+			    <input th:field="*{propietario.nombre}" type="text" class="form-control" id="nombre" placeholder="Ingrese uno o más nombres...">
 			  </div>
-			  <input th:field="*{id}" type="hidden" /> 
+			 <div class="form-group">
+			    <label for="tipoVehiculo">Tipo de vehiculo</label>
+			    <select class="form-control" th:field="*{tipoVehiculo}">
+			      <option value="auto">Auto</option>
+			      <option value="moto">Moto</option>
+			      <option value="camioneta">Camioneta</option>
+			    </select>
+			  </div>
+			  <input th:field="*{propietario.id}" type="hidden" /> 
 			  <button type="submit" class="btn btn-primary">Guardar</button>
 			  <a href="/propietarios/listar" class="btn btn-danger">Cancelar</a>
 			</form>
